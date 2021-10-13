@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +25,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth']], function (){
         return view('admin.users.index');
     });
 
+    Route::resource('user', UserController::class);
+    Route::resource('book', BookController::class);
 });
 
 Auth::routes();
