@@ -21,12 +21,12 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth']], function (){
         return view('admin.kategory.index');
     });
 
-    Route::get('/users', function () {
-        return view('admin.users.index');
-    });
+    // Route::get('/users', function () {
+    //     return view('admin.users.index');
+    // });
 
-    Route::resource('user', UserController::class);
-    Route::resource('book', BookController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('books', BookController::class);
 });
 
 Auth::routes();

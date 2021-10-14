@@ -8,7 +8,7 @@ Halaman User
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Users</div>
+                <div class="card-header">Users edit</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,7 +17,7 @@ Halaman User
                         </div>
                     @endif
 
-                        Users
+                        Users edit {{ $id }}
                 </div>
             </div>
         </div>

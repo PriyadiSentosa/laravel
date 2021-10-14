@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('judul')
-Halaman User
+Halaman Books
 
 @endsection
 @section('contents')
@@ -8,7 +8,7 @@ Halaman User
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Users</div>
+                <div class="card-header">Books {{ $id }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,7 +17,7 @@ Halaman User
                         </div>
                     @endif
 
-                        Users
+                        Books {{ $id }}
                 </div>
             </div>
         </div>
