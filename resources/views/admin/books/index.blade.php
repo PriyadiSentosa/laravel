@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('judul')
-Halaman Books
+Halaman Daftar Buku
 
 @endsection
 @section('contents')
@@ -11,11 +11,17 @@ Halaman Books
                 <div class="card-header">Books</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                @foreach ($buku as $data)
+                Nama Buku : {{$data->nama_buku}} <br>
+                @if ($data->jumlah_halaman > 1)
+                Jumlah Halaman : {{$data->jumlah_halaman}} <br>
+                @else
+                Jumlah Halaman : <b>Belum Mempunyai Halaman</b><br>
+                @endif
+                Translate Judul Buku : {!! $data->translate_judul_buku ?? '<b>Translate Buku Belum Tersedia</b>' !!} <hr>
+
+                @endforeach
+
 
                         Books
                 </div>
