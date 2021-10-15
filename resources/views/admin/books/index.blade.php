@@ -31,13 +31,13 @@
             <div class="card">
                 <div class="card-header">Daftar Pengarang</div>
                 <div class="card-body">
-                    @foreach ($pengarang as $pengarangs )
-                    Nama Pengarang Buku : {{ $pengarangs->nama_pengarang }} <br>
-                    Email Pengarang Buku : {{ $pengarangs->email }} <br>
-                    Telepon Pengarang : {{ $pengarangs->telp }} <br>
+                    @foreach ($pengarang as $data )
+                    Nama Pengarang Buku : {{ $data->nama_pengarang }} <br>
+                    Email Pengarang Buku : {{ $data->email }} <br>
+                    Telepon Pengarang : {{ $data->telp }} <br>
                     Daftar Buku :
                     <ul>
-                    @foreach ($pengarangs->book as $item)
+                    @foreach ($data->book as $item)
                    <li> {{ $item->nama_buku }}</li>
                     @endforeach</ul>
                     <hr>
