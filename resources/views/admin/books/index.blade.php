@@ -18,7 +18,11 @@
                         Nama Pengarang Buku : {{ $data->pengarang->nama_pengarang }} <br>
                         Email Pengarang Buku : {{ $data->pengarang->email }} <br>
                         Nama Buku : {{ $data->nama_buku }} <br>
+                        @if ($data->jumlah_halaman > 1)
                         Jumlah Halaman : {{ $data->jumlah_halaman }} <br>
+                        @else
+                        Jumlah Halaman : Belum Mempunyai Jumlah Halaman<br>
+                        @endif
                         Translate Judul Buku : {{ $data->translate_judul_buku ?? 'Belum ada Translate' }} <hr>
                     @endforeach
 
