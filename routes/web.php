@@ -6,7 +6,7 @@ use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 Route::group(['prefix'=>'admin'], function (){
