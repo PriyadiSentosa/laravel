@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\PengarangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::group(['prefix'=>'admin'], function (){
 
     Route::resource('users', UserController::class);
     Route::resource('books', BookController::class);
+    Route::resource('pengarangs', PengarangController::class);
 });
 
 Auth::routes();
