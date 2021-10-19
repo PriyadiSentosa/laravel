@@ -1,52 +1,53 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['title' => 'Data Pengarang'])
+
 @section('contents')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">Data Pengarang
-                    <a href="{{route('pengarangs.create')}}" class="btn btn-sm btn-primary float-right">Tambah</a>
-                </div>
-
-                <div class="card-body">
-
-                   <div class="table-responsive">
-                         <table class="table">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Pengarang</th>
-                                <th>Email</th>
-                                <th>Telepon</th>
-                                <th>Aksi</th>
-                            </tr>
-                            @php $no = 1; @endphp
-                            @foreach($pengarangs as $data)
-                            <tr>
-                                <td>
-                                    {{$no++}}
-                                </td>
-                                <td>
-                                    {{$data->nama_pengarang}}
-                                </td>
-                                <td>
-                                    {{$data->email}}
-                                </td>
-                                <td>
-                                    {{$data->telepon}}
-                                </td>
-                                <td><button class="btn btn-success">Edit</button></td>
-                                <td><a href="{{route('pengarangs.show', $data->id)}}" class="btn btn-warning">Show</a></td>
-                                <td><form action="{{route('pengarangs.destroy', $data->id)}}" method="post">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
+<center>
+<div class="col-md-7">
+    <div class="card">
+        <div class="card-header">Daftar Data Pengarang</div>
+        <div class="card-body">
+            <a href="{{ route('pengarangs.create') }}" class="btn btn-sm btn-primary float-left">Tambah Data Pengarang</a>
+            <div class="form-group">
+                <table class="table table-stripped table-inverse table-responsive">
+                    <thead class="thead-invers">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pengarang</th>
+                            <th>Email</th>
+                            <th>Telepon</th>
+                            <th>Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pengarangs as $index => $pengarang )
+                            <tr>
+                                <td>{{ $index+1 }}</td>
+                                <td>{{ $pengarang->nama_pengarang }}</td>
+                                <td>{{ $pengarang->email }}</td>
+                                <td>{{ $pengarang->telepon }}</td>
+                                <td>
+                                    <form action="{{ route('pengarangs.destroy', $pengarang->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <a href="{{ route('pengarangs.show', $pengarang->id) }}" class="btn btn-info">Show</a>
+                                        <a href="{{ route('pengarangs.edit', $pengarang->id) }}" class="btn btn-warning text-light">Edit</a>
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                        </form>
+
+                                </td>
+                            </tr>
                             @endforeach
-                        </table>
-                   </div>
-                </div>
+
+
+                        </tbody>
+                </table>
+
             </div>
         </div>
     </div>
-</div>
+        </div>
+    </div>
+
+    </div>
+</center>
 @endsection

@@ -7,87 +7,70 @@ use Illuminate\Http\Request;
 
 class PengarangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $pengarangs = Pengarang::get();
+        $pengarangs = Pengarang::all();
         return view('admin.pengarangs.index', compact('pengarangs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-
         return view('admin.pengarangs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        Pengarang::create([
-            'nama_pengarang' => $request->nama_pengarang,
-            'email' => $request->email,
-            'telepon' => $request->telepon
+        $request->validate([
+            'nama_pengarang' => 'required',
+            'email' => 'required|unique:pengarangs,email',
+            'telepon' => 'required|unique:pengarangs,telepon',
         ]);
+
+        $pengarang = new Pengarang();
+        $pengarang->nama_pengarang = $request->nama_pengarang;
+        $pengarang->email = $request->email;
+        $pengarang->telepon = $request->telepon;
+        $pengarang->save();
 
         return redirect()->route('pengarangs.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pengarang $pengarang)
+    public function show($id)
     {
-      return view('admin.pengarangs.show', compact('pengarang'));
+        $pengarang = Pengarang::findOrFail($id);
+        return view('admin.pengarangs.show', compact('pengarang'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pengarang $pengarang)
+
+    public function edit($id)
     {
-        //
+        $pengarang = Pengarang::findOrFail($id);
+        return view('admin.pengarangs.edit', compact('pengarang'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pengarang $pengarang)
+
+    public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'nama_pengarang' => 'required',
+            'email' => 'required|unique:pengarangs,email,' .$id,
+            'telepon' => 'required|unique:pengarangs,telepon,'.$id,
+        ]);
+
+        $pengarang = Pengarang::findOrFail($id);
+        $pengarang->nama_pengarang = $request->nama_pengarang;
+        $pengarang->email = $request->email;
+        $pengarang->telepon = $request->telepon;
+        $pengarang->save();
+
+        return redirect()->route('pengarangs.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pengarang $pengarang)
+
+    public function destroy($id)
     {
-        $pengarang->delete();
+        Pengarang::findOrFail($id)->delete();
+        return redirect()->route('pengarangs.index');
     }
 }
