@@ -34,13 +34,13 @@
                                 <td>
                                     {{$data->telepon}}
                                 </td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <a href="{{route('pengarangs.show', $data->id)}}" class="btn btn-warning">Show</a>
-                                    <form action="{{route('pengarangs.destroy', $data->id)}}" method="post">
+                                <td><button class="btn btn-success">Edit</button></td>
+                                <td><a href="{{route('pengarangs.show', $data->id)}}" class="btn btn-warning">Show</a></td>
+                                <td><form action="{{route('pengarangs.destroy', $data->id)}}" method="post">
                                     <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr></form>
+                                </form>
+                            </td>
+                        </tr>
                             @endforeach
                         </table>
                    </div>
